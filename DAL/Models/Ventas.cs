@@ -14,7 +14,7 @@ namespace DAL.Models
         [Key]
         public int IdVenta { get; set; }
 
-        public int Total { get; set; }
+        public double Total { get; set; }
 
         [ForeignKey("IdVenta")]
         public ICollection<DetalleVentas> DetalleVentas { get; set; }

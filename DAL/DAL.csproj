@@ -51,17 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202108241511349_inicial.cs" />
-    <Compile Include="Migrations\202108241511349_inicial.designer.cs">
-      <DependentUpon>202108241511349_inicial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202109100611238_TablaVentas.cs" />
-    <Compile Include="Migrations\202109100611238_TablaVentas.designer.cs">
-      <DependentUpon>202109100611238_TablaVentas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202109100635450_QuitarCampo.cs" />
-    <Compile Include="Migrations\202109100635450_QuitarCampo.designer.cs">
-      <DependentUpon>202109100635450_QuitarCampo.cs</DependentUpon>
+    <Compile Include="Migrations\202109102203402_Inicial.cs" />
+    <Compile Include="Migrations\202109102203402_Inicial.designer.cs">
+      <DependentUpon>202109102203402_Inicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contexto.cs" />
@@ -75,14 +67,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202108241511349_inicial.resx">
-      <DependentUpon>202108241511349_inicial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202109100611238_TablaVentas.resx">
-      <DependentUpon>202109100611238_TablaVentas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202109100635450_QuitarCampo.resx">
-      <DependentUpon>202109100635450_QuitarCampo.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202109102203402_Inicial.resx">
+      <DependentUpon>202109102203402_Inicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -76,16 +76,24 @@ namespace ProyectoPorCapa.Controllers
         {
             int cantidad = 1;
             ProductoVendido prod = new ProductoVendido();
+            var nombre = contexto.Productos.FirstOrDefault(x => x.IdProducto == id).NombreProducto;
+            var precio = contexto.Productos.FirstOrDefault(x => x.IdProducto == id).Precio;
+            var Total = cantidad * precio;
+            ProductoVendido.TotalAPagar += Total;
             bool existe = (from c in ProductoVendido.listaProductoVendido where c.id == id select c).Any();
             if (existe == false)
             {
-                prod.AgregarParaVender(id, cantidad);
+                prod.AgregarParaVender(id, cantidad, nombre, precio, Total);
+                
             } else
             {
               
               foreach  (var p in ProductoVendido.listaProductoVendido.Where(r=> r.id == id))
                     {
+                   
                     p.cantidad = p.cantidad + 1;
+                    p.Total += precio * cantidad;
+                  
                     break;
                 }
                 
@@ -100,7 +108,7 @@ namespace ProyectoPorCapa.Controllers
         public ActionResult Vender()
         {
             var ven = new Ventas();
-            ven.Total = 20;
+            ven.Total = ProductoVendido.TotalAPagar;
             contexto.Entry(ven).State = EntityState.Added;
             
             foreach (var p in ProductoVendido.listaProductoVendido)
@@ -115,14 +123,15 @@ namespace ProyectoPorCapa.Controllers
                     contexto.SaveChanges();
                 
             }
+
             ProductoVendido.listaProductoVendido.RemoveRange(0, ProductoVendido.listaProductoVendido.Count());
+            ProductoVendido.TotalAPagar = 0;
             return RedirectToAction("MostrarProductos");
         }
 
         public ActionResult MostrarVentas()
         {
             DetalleVentas db = new DetalleVentas();
-            Ventas ven = new Ventas();
             var model = contexto.DetalleVentas.ToList();
             ViewBag.Ventas = contexto.Ventas.ToList();
             return View(model);

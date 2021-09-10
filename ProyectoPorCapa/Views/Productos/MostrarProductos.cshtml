@@ -87,34 +87,43 @@
                     <table class="table table-bordered table-striped">
                         <tr>
                             <td>ID</td>
+                            <td>Nombre</td>
+                            <td>Cantidad</td>
+                            <td>Precio</td>
+                            <td>Total</td>
                         </tr>
 
                         @if (Model.Count > 0)
                         {
                             foreach (var persona in ProductoVendido.listaProductoVendido)
                             {
-                    <tr>
-                        <td>@persona.id</td>
-                        <td>@persona.cantidad</td>
-
-
-                    </tr>
+                                <tr>
+                                    <td>@persona.id</td>
+                                    <td>@persona.NombreProducto</td>
+                                    <td>@persona.cantidad</td>
+                                    <td>$ @persona.Precio</td>
+                                    <td>$ @persona.Total</td>
+                                </tr>
 
                             }
-                            <tr>
-                                <td>
-                                    <button class="btn btn-default"
-                                            onclick="window.location.href = '/Productos/Vender'">
-                                        Vender Producto
-                                    </button>
-                                </td>
-                            </tr>
-                          
+
                         }
                     </table>
 
+                    <h4>Total: $ @ProductoVendido.TotalAPagar</h4>
+
+                    <button class="btn btn-default"
+                            onclick="window.location.href = '/Productos/Vender'">
+                        Realizar Venta
+                    </button>
+
                 </div>
             </div>
+
+            <button class="btn btn-success"
+                    onclick="window.location.href = '/Productos/MostrarVentas'">
+                Ver Ventas
+            </button>
         </div>
 
         @if (ViewBag.Eliminado != null)
