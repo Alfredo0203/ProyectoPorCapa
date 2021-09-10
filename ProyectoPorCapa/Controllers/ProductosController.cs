@@ -1,6 +1,7 @@
 ﻿using BAL.IServices;
 using BAL.Services;
 using DAL.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -73,8 +74,24 @@ namespace ProyectoPorCapa.Controllers
 
         public ActionResult SeleccionarProducto(int id)
         {
+            int cantidad = 1;
             ProductoVendido prod = new ProductoVendido();
-            prod.AgregarParaVender(id);
+            bool existe = (from c in ProductoVendido.listaProductoVendido where c.id == id select c).Any();
+            if (existe == false)
+            {
+                prod.AgregarParaVender(id, cantidad);
+            } else
+            {
+              
+              foreach  (var p in ProductoVendido.listaProductoVendido.Where(r=> r.id == id))
+                    {
+                    p.cantidad = p.cantidad + 1;
+                    break;
+                }
+                
+
+
+            }
             var productos = ProductoVendido.listaProductoVendido;
 
             return RedirectToAction("MostrarProductos", productos);
@@ -85,15 +102,18 @@ namespace ProyectoPorCapa.Controllers
             var ven = new Ventas();
             ven.Total = 20;
             contexto.Entry(ven).State = EntityState.Added;
-            contexto.SaveChanges();
+            
             foreach (var p in ProductoVendido.listaProductoVendido)
             {
-                var model = new DAL.Models.DetalleVentas();
                 
-                model.IdProducto = p.id;
-                model.IdVenta = ven.IdVenta;
-                contexto.Entry(model).State = EntityState.Added;
-                contexto.SaveChanges();
+                    var model = new DAL.Models.DetalleVentas();
+
+                    model.IdProducto = p.id;
+                model.Cantidad = p.cantidad;
+                    model.IdVenta = ven.IdVenta;
+                    contexto.Entry(model).State = EntityState.Added;
+                    contexto.SaveChanges();
+                
             }
             ProductoVendido.listaProductoVendido.RemoveRange(0, ProductoVendido.listaProductoVendido.Count());
             return RedirectToAction("MostrarProductos");

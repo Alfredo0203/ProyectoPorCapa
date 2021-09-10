@@ -93,18 +93,19 @@
                         {
                             foreach (var persona in ProductoVendido.listaProductoVendido)
                             {
-                                <tr>
-                                    <td>@persona.id</td>
+                    <tr>
+                        <td>@persona.id</td>
+                        <td>@persona.cantidad</td>
 
 
-                                </tr>
+                    </tr>
 
                             }
                             <tr>
                                 <td>
                                     <button class="btn btn-default"
                                             onclick="window.location.href = '/Productos/Vender'">
-                                        Agregar Producto
+                                        Vender Producto
                                     </button>
                                 </td>
                             </tr>
