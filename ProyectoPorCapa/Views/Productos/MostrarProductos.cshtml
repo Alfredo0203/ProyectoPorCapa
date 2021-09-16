@@ -103,27 +103,35 @@
                                     <td>@persona.cantidad</td>
                                     <td>$ @persona.Precio</td>
                                     <td>$ @persona.Total</td>
+                                    <td>
+
+                                        <button class="btn btn-danger"
+                                                onclick="window.location.href='/Productos/EliminarElementoDeLaLista?id='+@persona.id">
+                                            Quitar
+                                        </button>
+
+                                    </td>
                                 </tr>
 
                             }
 
                         }
                     </table>
-
+            
                     <h4>Total: $ @ProductoVendido.TotalAPagar</h4>
 
-                    <button class="btn btn-default"
+                    <button class="btn btn-primary" id="BtnRealizarVenta"
                             onclick="window.location.href = '/Productos/Vender'">
                         Realizar Venta
                     </button>
 
+                    <button class="btn btn-success" style="margin-top: 10px"
+                            onclick="window.location.href = '/Productos/MostrarVentas'">
+                        Ver Ventas
+                    </button>
                 </div>
             </div>
 
-            <button class="btn btn-success"
-                    onclick="window.location.href = '/Productos/MostrarVentas'">
-                Ver Ventas
-            </button>
         </div>
 
         @if (ViewBag.Eliminado != null)
@@ -136,5 +144,15 @@
             {
                 <script>alert("El producto no pudo eliminarse")</script>
             }
+        }
+
+
+        @if (!ProductoVendido.listaProductoVendido.Any())
+        {
+            <script>document.getElementById("BtnRealizarVenta").style.display = "none"</script>
+        }
+        else
+        {
+            <script>document.getElementById("BtnRealizarVenta").style.display = "block"</script>
         }
 

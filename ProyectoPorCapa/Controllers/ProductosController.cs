@@ -105,6 +105,14 @@ namespace ProyectoPorCapa.Controllers
             return RedirectToAction("MostrarProductos", productos);
         }
        
+        //QUITAR ELEMENTOS DELCARRITO
+        public ActionResult EliminarElementoDeLaLista(int id= 0)
+        {
+            ProductoVendido.listaProductoVendido.RemoveAll(x => x.id == id);
+            return RedirectToAction("MostrarProductos");
+        }
+
+
         public ActionResult Vender()
         {
             var ven = new Ventas();
